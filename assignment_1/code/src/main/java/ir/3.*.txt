@@ -1,0 +1,123 @@
+3.1____
+What happens to the two documents that you selected?
+They become two of the very best ranked
+Zombies_Reclaime_the_Steets from 8 to 2
+Zombie_Walkfrom 2 to 3
+
+What are the characteristics of the other documents in the new top ten list - what are they about? Are there any new ones that were not among the top ten before?
+They have similarity (words, amount of words, etc.) to the selected ones. Not to much similarity in topic though.
+
+Try different values for the weights α and β: How is the relevance feedback process affected by α and β?
+alpha = 0.2, beta = 0.8 works not so good (assume beta to be over evaluated)
+Overall it is striking that short documents or references are higly prefered by the system (maybe due to configurations from the previous assignments)
+alpha = 0.2, beta = 0.8 Seems not to make a huge difference, probably again due to influences from previous assignments
+
+Ponder these questions: 
+Why is the search after feedback slower?
+Because the query is way longer, meaning more evaluations/comparisons have to be computed. 
+Also the number of documents increases and all of them have to be processed.
+
+Why is the number of returned documents larger?
+The original query gets extended, which increases the amount of terms included in the search and by that the number of documents found in a union search.
+
+Why is relevance feedback called a local query refining method?
+The original query gets "refined" by the additional information from the relevant documents, in a local fashion when evaluated in the geographical, high dimensional vetor space.
+Remember vector graphic of document points and centroids of relevant and irelevant clusters.
+
+What are other alternatives to relevance feedback for query refining?
+Not using user input. Instead using other metrics, or just the best ranked retrieved documents for refining.
+This can result in query drift. (Search gets miss routed/directed)
+
+
+3.2____
+1. nDCG of average_relevance_filtered.txt
+The gain of average_relevance_filtered.txt is 0.5061113866103994
+
+2. Run with mathematics.f as relevant
+mathematics.f was in place 237, now found 16515 documents
+_________________________________________________________________
+Math.f 3
+Mathematics.f 3
+Pladd.f 0
+The_Gap.f 0
+MSB.f 1
+Calculus_room.f 1
+RoyWeright.f 0
+DavePoole.f 0
+David_Poole.f 0
+DavidPoole.f 0
+davisWiki.tar.gz 0
+TravisTaylor.f 0
+Milleniumchilddevelopmentcenter.f 0
+Tri_Delt.f 0
+Majors.f 1
+JoshBurkart.f 0
+Physics_and_Geology.f 0
+Quantitative_Biology_and_Bioinformatics.f 1
+Minors.f 0
+JillNi.f 0
+YCCC.f 0
+EthanLeavy.f 0
+WFCB.f 0
+Professor.f 0
+AmitSahoo.f 0
+Biology.f 0
+Biological_Science.f 0
+Division_of_Biological_Science.f 0
+Civil_Enfineering.f 0
+Journal_of_Mathematical_Physics.f 1
+Calculus.f 2
+matt%27s_courses.f 2
+Weeder_Classes.f 0
+Yeni.f 0
+FrankWu.f 0
+LarinLucero.f 0
+GeorgeSuarez.f 0
+Language_Learning_Center.f 0
+SeatonTsai.f 0
+MAST.f 1
+Reuben_Sandwich.f 0
+Enviromental_Science_and_Management.f 0
+Marrone_Organic_Innovations.f 0
+Apex_Computer_Services.f 0
+Society_for_Industrial_and_Applied_Mathematics.f 2
+Measures.f 0
+Primary_Concepts_Tattooing_%26_Body_Piercing.f 0
+Primary_Concepts.f 0
+JordanSmart.f 0
+Guohua_Xia%2C_M.D..f 0
+_________________________________________________________________
+
+3. new nDCG, excluding mathematics.f
+With Mathematics.f, the gain of feedbacked_result_relevance.txt is 0.8566494535248542
+Without Mathematics.f, the gain of feedbacked_result_relevance.txt is 0.7651263750644471
+QUESTION: Why do we want to omit that document?
+Because it was used redirect(judge the relevance) of the query. Therefore it has 
+an unproportional weight in the scorring. 
+
+4. result comparison
+It becomes obvious that the relevance scored query retrieved a significantly better 
+distributed result list.
+
+3.3____
+Results for K-Grams 've' and intersect 'th he':
+All 3307 entries of 'th he' intersected di-gram ...
+All 7526 entries of 've' di-gram ...
+For aqual results enable the peint function in Engine.java and run index
+
+3.4____
+For non ranked retrivel probably no results will be found, because it uses intersection search and the query gets expended significantly!
+How would you interpret the meaning of the query "historic* humo*r"?
+historical humor, wild cards can be longer than a single char or be ignored as well.
+
+Why could the word "revenge" be returned by a bigram index in return to a query "re*ve"?
+Because it contains both bi-grams and therefore would be included in the result of the performed intersect.
+
+How could this problem of false positives be solved?
+Do a final rege search of the complete search term over the result list. As suggested in the lecture.
+
+How would you get the ranking for the ranked wildcard queries?
+The ranking is done by searching the possible words represented by the wildcard terms, just as with regular terms
+
+Which of the three queries was the fastest? Which was the slowest? Why?
+First to last they increase in time complexity, since the amout of wildcards to handle increases in each query

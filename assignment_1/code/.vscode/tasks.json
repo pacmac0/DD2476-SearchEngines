@@ -1,0 +1,40 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "verify",
+      "type": "shell",
+      "command": "nix-shell -p maven --run \"mvn -B verify\"",
+      "group": "build"
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "nix-shell -p maven --run \"mvn -B test\"",
+      "group": "test"
+    },
+    {
+      "label": "compile",
+      "type": "shell",
+      "command": "nix-shell -p maven --run \"mvn compile\"",
+      "group": "build"
+    },
+    {
+      "label": "run search engine",
+      "type": "shell",
+      "command": "${workspaceFolder}/run_search_engine.sh",
+      "group": "none",
+      "dependsOn": [
+        "compile"
+      ]
+    },
+    {
+      "label": "clean index",
+      "type": "shell",
+      "command": "rm ${workspaceFolder}/index/*",
+      "group": "none",
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+3.1
+What happens to the two documents that you selected?
+They become two of the very best ranked
+Zombies_Reclaime_the_Steets from 8 to 2
+Zombie_Walkfrom 2 to 3
+
+What are the characteristics of the other documents in the new top ten list - what are they about? Are there any new ones that were not among the top ten before?
+They have similarity (words, amount of words, etc.) to the selected ones. Not to much similarity in topic though.
+
+Try different values for the weights α and β: How is the relevance feedback process affected by α and β?
+alpha = 0.2, beta = 0.8 works not so good (assume beta to be over evaluated)
+Overall it is striking that short documents or references are higly prefered by the system (maybe due to configurations from the previous assignments)
+alpha = 0.2, beta = 0.8 Seems not to make a huge difference, probably again due to influences from previous assignments
+
+Ponder these questions: 
+Why is the search after feedback slower?
+Because the query is way longer, meaning more evaluations/comparisons have to be computed. 
+Also the number of documents increases and all of them have to be processed.
+
+Why is the number of returned documents larger?
+The original query gets extended, which increases the amount of terms included in the search and by that the number of documents found in a union search.
+
+Why is relevance feedback called a local query refining method?
+The original query gets "refined" by the additional information from the relevant documents, in a local fashion when evaluated in the geographical, high dimensional vetor space.
+Remember vector graphic of document points and centroids of relevant and irelevant clusters.
+
+What are other alternatives to relevance feedback for query refining?
+Not using user input. Instead using other metrics, or just the best ranked retrieved documents for refining.
+This can result in query drift. (Search gets miss routed/directed)
+
+
+3.2

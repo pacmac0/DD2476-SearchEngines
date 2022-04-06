@@ -1,0 +1,111 @@
+2.3 idf's: 
+(for whole doc corpus)
+redirect: 2.2156976535972297
+davis: 0.5276298336922967
+food: 2.2498343015278257
+coop: 3.4904628350318045
+residence: 4.075252120394949
+hall: 2.671435408582856
+movein: 5.564291639806683
+recycling: 4.450864265353433
+drive: 2.529769285417843
+
+__(pen and paper corpus)__ => np.log(N/tf)
+redirect: 0.0 (part of every document and therefore non informative)
+davis: 0.6931471805599453
+food: 0.6931471805599453
+coop: 0.6931471805599453
+residence: 0.6931471805599453
+hall: 0.6931471805599453
+movein: 0.6931471805599453
+recycling: 0.6931471805599453
+drive: 0.6931471805599453
+
+
+2.4
+Judging from the titles the ranking makes sense to me. Low ranked pages seem to have
+no or a insufficent connection to the topic. Unfortuanatly it happens in the high ranked documents, that short documents or linking docs,
+are shown, because they have a high frequancy of query terms relative to there length. Also terms that just contain one word
+of the query are often ranked to good, because of its high frequency/ value. I assume this to be due to 
+the union search!
+
+2.5
+Look up the titles of some documents with high rank, and some documents with low rank. 
+Does the ranking make sense?
+Just looking at the page rank the results seem reasonable, the problem is, that some very "important" pages
+might take all attention. The balancing of how much influence the pagerank has in the end, will be important.
+
+What is the effect of letting the tf_idf score dominate this ranking? 
+- The content of the page is the predominant criteria, not the pages relevance it self. (specific info)
+What is the effect of letting the pagerank dominate? 
+- the pages relevance(reputation) in form of links is more important (trustworthy info)
+What would be a good strategy for selecting an ”optimal” combination?
+To select the optimal combination finding the balance point between recall and precission would be the best 
+way to go. These measures are on the other hand dependent on human judgement.
+(Remember the quality measures you studied in Task 2.3.)
+
+2.6 compare recall and precission
+Depending on how the relevance of the documents is judged both methods can be argued for.
+Noticeable:
+Query = "Zombie attack"
+For term count, the first result is bad.
+For Euclidean, more relevant results are in the top ranks!
+Query = "money transfer"
+For this query non of the documents seem rally useful in my eyes,
+otherwise it seems the same...
+over estimating the importance of just transfer in regard to the query(because of union search)
+
+Precission and recall: (Not sure how this was meant. Assuming again 100 relative docs in the corpus!!!)
+            (Zombie attack, money transfer)
+        | Rel. Docs. | Precission | Recall       |
+||.||_1 |    3, 2    | 3/10, 2/10 | 3/100, 2/100 |
+||.||_2 |    4, 2    | 4/10, 2/10 | 4/100, 2/100 |
+With regards to all this I argue for the euclidean normalization term to be the better one, 
+because it in average it has a better precission and recall ratio. Probably due to its more direct relation between the points.
+
+2.7
+The monte carlo methods is very quick to converge to a fixed value. 
+Between the methods the results differ. It is evident, that for each method a specific parametrization is needed.
+--The amount of sinks influences the performance of the algorithms e.g. alg.5 significantly! Most of the times the surfer gets in a sink very quick.
+This way most documents count up equally not presenting the inherent information of the "graph".
+
+The claim, that not an infinit huge amount ofruns has to be performed, made in the paper is supported by the results, since the estimations give a good low error estimation of the true values. 
+
+Running it on the swedish wikipedia corpus on the other hand showed, that for large corpura,  it still takes a vast amount of time 
+and the approximations are getting worse since the distribution of endpoints stretches out. (Growing by factor number of documents)
+
+__Svedish Wikipedia__
+I don't really understand all the titles, but to me it seems reasonable,
+that a lot of Kategories are included as sort of a root for a lot of other pages.
+And top/most popular is for obvious reasons leading the charge.
+The top 30 ranked Documents are:
+Kategori:Topp, 0.009582857130961377
+Wikipedia:Kategorier, 0.00811053307602792
+Kategori:Samhälle, 0.005986618453128155
+Kategori:Personer, 0.0033125990136625844
+Kategori:Män, 0.003277729550360873
+Kategori:Geografi, 0.003192377431234296
+Samhälle, 0.0026766216382194297
+USA, 0.0020984130751119465
+Sverige, 0.0020291945882592957
+Kategori:Kultur, 0.0020021317212191615
+Kategori:Världsdelar, 0.0018985642108155707
+Kategori:Levande personer, 0.0018324683624675506
+Wikipedia:CatScan, 0.0017663725141195304
+Kategori:Kategorier, 0.0017523206408486915
+Kategori:Personer efter kön, 0.0017070423825315437
+Kategori:Kategorier efter geografiskt område, 0.0016851839129991277
+Kategori:Världens länder, 0.001673213798731376
+Kategori:Samhällsvetenskap, 0.001656559726706678
+Kategori:Kategorier efter land, 0.0015451856200415102
+Kategori:Naturvetenskap, 0.0015425834212876512
+Kategori:Vetenskap, 0.0015368585840291613
+Kategori:Wikipedia:Administration, 0.0014915803257120137
+Kategori:Jorden, 0.0014509860251518123
+Kategori:Geovetenskap, 0.0012808022266494296
+Kategori:Europa, 0.001213145059049094
+Kategori:Teknik, 0.0011652646019780874
+Kategori:Kunskap, 0.0011590193249688256
+Latin, 0.001116343265405537
+Kategori:Personer efter verksamhetsområde, 0.0011153023859039935
+Stockholm, 0.001069503687836074
